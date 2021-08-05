@@ -1,0 +1,83 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[8],{
+
+/***/ "./node_modules/core-js/internals/array-sort.js":
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/array-sort.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// TODO: use something more complex like timsort?\nvar floor = Math.floor;\n\nvar mergeSort = function (array, comparefn) {\n  var length = array.length;\n  var middle = floor(length / 2);\n  return length < 8 ? insertionSort(array, comparefn) : merge(\n    mergeSort(array.slice(0, middle), comparefn),\n    mergeSort(array.slice(middle), comparefn),\n    comparefn\n  );\n};\n\nvar insertionSort = function (array, comparefn) {\n  var length = array.length;\n  var i = 1;\n  var element, j;\n\n  while (i < length) {\n    j = i;\n    element = array[i];\n    while (j && comparefn(array[j - 1], element) > 0) {\n      array[j] = array[--j];\n    }\n    if (j !== i++) array[j] = element;\n  } return array;\n};\n\nvar merge = function (left, right, comparefn) {\n  var llength = left.length;\n  var rlength = right.length;\n  var lindex = 0;\n  var rindex = 0;\n  var result = [];\n\n  while (lindex < llength || rindex < rlength) {\n    if (lindex < llength && rindex < rlength) {\n      result.push(comparefn(left[lindex], right[rindex]) <= 0 ? left[lindex++] : right[rindex++]);\n    } else {\n      result.push(lindex < llength ? left[lindex++] : right[rindex++]);\n    }\n  } return result;\n};\n\nmodule.exports = mergeSort;\n\n\n//# sourceURL=webpack:///./node_modules/core-js/internals/array-sort.js?");
+
+/***/ }),
+
+/***/ "./node_modules/core-js/internals/engine-ff-version.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/engine-ff-version.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var userAgent = __webpack_require__(/*! ../internals/engine-user-agent */ \"./node_modules/core-js/internals/engine-user-agent.js\");\n\nvar firefox = userAgent.match(/firefox\\/(\\d+)/i);\n\nmodule.exports = !!firefox && +firefox[1];\n\n\n//# sourceURL=webpack:///./node_modules/core-js/internals/engine-ff-version.js?");
+
+/***/ }),
+
+/***/ "./node_modules/core-js/internals/engine-is-ie-or-edge.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/internals/engine-is-ie-or-edge.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var UA = __webpack_require__(/*! ../internals/engine-user-agent */ \"./node_modules/core-js/internals/engine-user-agent.js\");\n\nmodule.exports = /MSIE|Trident/.test(UA);\n\n\n//# sourceURL=webpack:///./node_modules/core-js/internals/engine-is-ie-or-edge.js?");
+
+/***/ }),
+
+/***/ "./node_modules/core-js/internals/engine-webkit-version.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/internals/engine-webkit-version.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var userAgent = __webpack_require__(/*! ../internals/engine-user-agent */ \"./node_modules/core-js/internals/engine-user-agent.js\");\n\nvar webkit = userAgent.match(/AppleWebKit\\/(\\d+)\\./);\n\nmodule.exports = !!webkit && +webkit[1];\n\n\n//# sourceURL=webpack:///./node_modules/core-js/internals/engine-webkit-version.js?");
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/es.array.sort.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.array.sort.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar $ = __webpack_require__(/*! ../internals/export */ \"./node_modules/core-js/internals/export.js\");\nvar aFunction = __webpack_require__(/*! ../internals/a-function */ \"./node_modules/core-js/internals/a-function.js\");\nvar toObject = __webpack_require__(/*! ../internals/to-object */ \"./node_modules/core-js/internals/to-object.js\");\nvar toLength = __webpack_require__(/*! ../internals/to-length */ \"./node_modules/core-js/internals/to-length.js\");\nvar toString = __webpack_require__(/*! ../internals/to-string */ \"./node_modules/core-js/internals/to-string.js\");\nvar fails = __webpack_require__(/*! ../internals/fails */ \"./node_modules/core-js/internals/fails.js\");\nvar internalSort = __webpack_require__(/*! ../internals/array-sort */ \"./node_modules/core-js/internals/array-sort.js\");\nvar arrayMethodIsStrict = __webpack_require__(/*! ../internals/array-method-is-strict */ \"./node_modules/core-js/internals/array-method-is-strict.js\");\nvar FF = __webpack_require__(/*! ../internals/engine-ff-version */ \"./node_modules/core-js/internals/engine-ff-version.js\");\nvar IE_OR_EDGE = __webpack_require__(/*! ../internals/engine-is-ie-or-edge */ \"./node_modules/core-js/internals/engine-is-ie-or-edge.js\");\nvar V8 = __webpack_require__(/*! ../internals/engine-v8-version */ \"./node_modules/core-js/internals/engine-v8-version.js\");\nvar WEBKIT = __webpack_require__(/*! ../internals/engine-webkit-version */ \"./node_modules/core-js/internals/engine-webkit-version.js\");\n\nvar test = [];\nvar nativeSort = test.sort;\n\n// IE8-\nvar FAILS_ON_UNDEFINED = fails(function () {\n  test.sort(undefined);\n});\n// V8 bug\nvar FAILS_ON_NULL = fails(function () {\n  test.sort(null);\n});\n// Old WebKit\nvar STRICT_METHOD = arrayMethodIsStrict('sort');\n\nvar STABLE_SORT = !fails(function () {\n  // feature detection can be too slow, so check engines versions\n  if (V8) return V8 < 70;\n  if (FF && FF > 3) return;\n  if (IE_OR_EDGE) return true;\n  if (WEBKIT) return WEBKIT < 603;\n\n  var result = '';\n  var code, chr, value, index;\n\n  // generate an array with more 512 elements (Chakra and old V8 fails only in this case)\n  for (code = 65; code < 76; code++) {\n    chr = String.fromCharCode(code);\n\n    switch (code) {\n      case 66: case 69: case 70: case 72: value = 3; break;\n      case 68: case 71: value = 4; break;\n      default: value = 2;\n    }\n\n    for (index = 0; index < 47; index++) {\n      test.push({ k: chr + index, v: value });\n    }\n  }\n\n  test.sort(function (a, b) { return b.v - a.v; });\n\n  for (index = 0; index < test.length; index++) {\n    chr = test[index].k.charAt(0);\n    if (result.charAt(result.length - 1) !== chr) result += chr;\n  }\n\n  return result !== 'DGBEFHACIJK';\n});\n\nvar FORCED = FAILS_ON_UNDEFINED || !FAILS_ON_NULL || !STRICT_METHOD || !STABLE_SORT;\n\nvar getSortCompare = function (comparefn) {\n  return function (x, y) {\n    if (y === undefined) return -1;\n    if (x === undefined) return 1;\n    if (comparefn !== undefined) return +comparefn(x, y) || 0;\n    return toString(x) > toString(y) ? 1 : -1;\n  };\n};\n\n// `Array.prototype.sort` method\n// https://tc39.es/ecma262/#sec-array.prototype.sort\n$({ target: 'Array', proto: true, forced: FORCED }, {\n  sort: function sort(comparefn) {\n    if (comparefn !== undefined) aFunction(comparefn);\n\n    var array = toObject(this);\n\n    if (STABLE_SORT) return comparefn === undefined ? nativeSort.call(array) : nativeSort.call(array, comparefn);\n\n    var items = [];\n    var arrayLength = toLength(array.length);\n    var itemsLength, index;\n\n    for (index = 0; index < arrayLength; index++) {\n      if (index in array) items.push(array[index]);\n    }\n\n    items = internalSort(items, getSortCompare(comparefn));\n    itemsLength = items.length;\n    index = 0;\n\n    while (index < itemsLength) array[index] = items[index++];\n    while (index < arrayLength) delete array[index++];\n\n    return array;\n  }\n});\n\n\n//# sourceURL=webpack:///./node_modules/core-js/modules/es.array.sort.js?");
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/es.symbol.description.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.symbol.description.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("// `Symbol.prototype.description` getter\n// https://tc39.es/ecma262/#sec-symbol.prototype.description\n\nvar $ = __webpack_require__(/*! ../internals/export */ \"./node_modules/core-js/internals/export.js\");\nvar DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ \"./node_modules/core-js/internals/descriptors.js\");\nvar global = __webpack_require__(/*! ../internals/global */ \"./node_modules/core-js/internals/global.js\");\nvar has = __webpack_require__(/*! ../internals/has */ \"./node_modules/core-js/internals/has.js\");\nvar isObject = __webpack_require__(/*! ../internals/is-object */ \"./node_modules/core-js/internals/is-object.js\");\nvar defineProperty = __webpack_require__(/*! ../internals/object-define-property */ \"./node_modules/core-js/internals/object-define-property.js\").f;\nvar copyConstructorProperties = __webpack_require__(/*! ../internals/copy-constructor-properties */ \"./node_modules/core-js/internals/copy-constructor-properties.js\");\n\nvar NativeSymbol = global.Symbol;\n\nif (DESCRIPTORS && typeof NativeSymbol == 'function' && (!('description' in NativeSymbol.prototype) ||\n  // Safari 12 bug\n  NativeSymbol().description !== undefined\n)) {\n  var EmptyStringDescriptionStore = {};\n  // wrap Symbol constructor for correct work with undefined description\n  var SymbolWrapper = function Symbol() {\n    var description = arguments.length < 1 || arguments[0] === undefined ? undefined : String(arguments[0]);\n    var result = this instanceof SymbolWrapper\n      ? new NativeSymbol(description)\n      // in Edge 13, String(Symbol(undefined)) === 'Symbol(undefined)'\n      : description === undefined ? NativeSymbol() : NativeSymbol(description);\n    if (description === '') EmptyStringDescriptionStore[result] = true;\n    return result;\n  };\n  copyConstructorProperties(SymbolWrapper, NativeSymbol);\n  var symbolPrototype = SymbolWrapper.prototype = NativeSymbol.prototype;\n  symbolPrototype.constructor = SymbolWrapper;\n\n  var symbolToString = symbolPrototype.toString;\n  var native = String(NativeSymbol('test')) == 'Symbol(test)';\n  var regexp = /^Symbol\\((.*)\\)[^)]+$/;\n  defineProperty(symbolPrototype, 'description', {\n    configurable: true,\n    get: function description() {\n      var symbol = isObject(this) ? this.valueOf() : this;\n      var string = symbolToString.call(symbol);\n      if (has(EmptyStringDescriptionStore, symbol)) return '';\n      var desc = native ? string.slice(7, -1) : string.replace(regexp, '$1');\n      return desc === '' ? undefined : desc;\n    }\n  });\n\n  $({ global: true, forced: true }, {\n    Symbol: SymbolWrapper\n  });\n}\n\n\n//# sourceURL=webpack:///./node_modules/core-js/modules/es.symbol.description.js?");
+
+/***/ }),
+
+/***/ "./src/fetures/AnimeCategories/AnimeCategories.jsx":
+/*!*********************************************************!*\
+  !*** ./src/fetures/AnimeCategories/AnimeCategories.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Categories; });\n/* harmony import */ var core_js_modules_es_array_sort_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.sort.js */ \"./node_modules/core-js/modules/es.array.sort.js\");\n/* harmony import */ var core_js_modules_es_array_sort_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_sort_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/esm/react-router-dom.js\");\n/* harmony import */ var _layouts_Layout_Layout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../layouts/Layout/Layout */ \"./src/layouts/Layout/Layout.jsx\");\n/* harmony import */ var _Animes_component_Animes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Animes/component/Animes */ \"./src/fetures/Animes/component/Animes.jsx\");\n/* harmony import */ var _AreaLeft_component_AreaLeft__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../AreaLeft/component/AreaLeft */ \"./src/fetures/AreaLeft/component/AreaLeft.jsx\");\n(function () {\n  var enterModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.enterModule : undefined;\n  enterModule && enterModule(module);\n})();\n\n\n\nvar __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default.signature : function (a) {\n  return a;\n};\n\n\n\n\n\n\n\nfunction Categories() {\n  const {\n    meta\n  } = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__[\"useParams\"])();\n  const categories = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__[\"useSelector\"])(state => state.categories.data);\n  const indexes = categories.filter(x => x.key === meta);\n  const animes = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__[\"useSelector\"])(state => state.animes.data);\n  const animeCates = animes.filter(x => x.categoryKey === meta).sort(function (a, b) {\n    return b.views - a.views;\n  });\n  Object(react__WEBPACK_IMPORTED_MODULE_1__[\"useEffect\"])(() => {\n    window.scroll(0, 0);\n  }, []);\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_layouts_Layout_Layout__WEBPACK_IMPORTED_MODULE_4__[\"default\"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(\"div\", {\n    className: \"main-pad\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(\"div\", {\n    className: \"anis-content\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(\"div\", {\n    className: \"content\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Animes_component_Animes__WEBPACK_IMPORTED_MODULE_5__[\"default\"], {\n    animes: animeCates,\n    flewBig: true,\n    title: indexes.length > 0 ? indexes[0].title : \"\"\n  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_AreaLeft_component_AreaLeft__WEBPACK_IMPORTED_MODULE_6__[\"default\"], {\n    animes: animes,\n    title: \"Ba\\u0309ng x\\xEA\\u0301p ha\\u0323ng\"\n  }))));\n}\n\n__signature__(Categories, \"useParams{{ meta }}\\nuseSelector{categories}\\nuseSelector{animes}\\nuseEffect{}\", () => [react_router_dom__WEBPACK_IMPORTED_MODULE_3__[\"useParams\"], react_redux__WEBPACK_IMPORTED_MODULE_2__[\"useSelector\"], react_redux__WEBPACK_IMPORTED_MODULE_2__[\"useSelector\"]]);\n\n;\n\n(function () {\n  var reactHotLoader = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default : undefined;\n\n  if (!reactHotLoader) {\n    return;\n  }\n\n  reactHotLoader.register(Categories, \"Categories\", \"C:\\\\Users\\\\Binhh\\\\source\\\\repos\\\\AnimeAB\\\\AnimeAB.Core\\\\ClientApp\\\\src\\\\fetures\\\\AnimeCategories\\\\AnimeCategories.jsx\");\n})();\n\n;\n\n(function () {\n  var leaveModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.leaveModule : undefined;\n  leaveModule && leaveModule(module);\n})();\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/harmony-module.js */ \"./node_modules/webpack/buildin/harmony-module.js\")(module)))\n\n//# sourceURL=webpack:///./src/fetures/AnimeCategories/AnimeCategories.jsx?");
+
+/***/ })
+
+}]);

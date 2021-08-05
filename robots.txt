@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cupidvu.github.io/sitemap.txt
