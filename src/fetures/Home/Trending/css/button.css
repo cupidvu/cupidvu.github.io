@@ -1,0 +1,49 @@
+.film-trending .btn-arrow-next{
+    position: absolute;
+    line-height: 140px;
+    height: 46%;
+    bottom: 53%;
+    right: -40px;
+    background: #2a2b31;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    outline: 0;
+    box-shadow: none;
+    color: #fff;
+    font-size: 18px;
+    width: 40px;
+}
+.film-trending .btn-arrow-prev{
+    position: absolute;
+    line-height: 140px;
+    height: 46%;
+    bottom: 10px;
+    right: -40px;
+    background: #2a2b31;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    outline: 0;
+    box-shadow: none;
+    color: #fff;
+    font-size: 18px;
+    width: 40px;
+}
+.film-trending .btn-arrow-next:hover, .film-trending .btn-arrow-prev:hover{
+    background: #cae962;
+    color: #2a2b31;
+}
+
+@media screen and (max-width: 1299px){
+    .film-trending .btn-arrow-prev, .film-trending .btn-arrow-next{
+        line-height: 70px;
+    }
+}
+
+
+@media screen and (max-width: 766px) {
+    .film-trending .btn-arrow-prev,.film-trending .btn-arrow-next{
+        display: none;
+    }
+}

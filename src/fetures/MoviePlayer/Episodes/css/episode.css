@@ -1,0 +1,64 @@
+
+/* ----Episode movie------ */
+
+.episode{
+    margin-top: 50px;
+    width: 100%;
+    position: relative;
+}
+@media screen and (max-width: 991px){
+    .episode{
+        margin-top: 30px;
+    }
+}
+.episode .episode__title{
+    margin-bottom: 10px;
+}
+.episode .episode__list{
+    color: #EC5C2A;
+    border: 1px solid #EC5C2A;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    width: max-content;
+    margin-bottom: 20px;
+}
+.episode .min-episodes .episode-item{
+    padding: 0 10px 0 0;
+    max-width: 250px;
+}
+.episode .episode-item{
+    padding: 0 1%;
+}
+.episode .episode-item h6{
+    margin: 0;
+}
+
+.episode .episode-item .active-anis{
+    border-radius: 4px;
+    border: 2px solid #cae962;
+    padding: 1px;
+}
+
+@media screen and (max-width: 991px){
+    .episode .episode-list-item{
+        margin: 0 -15px;
+    }
+
+    .episode .episode-item h6{
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        height: 26px;
+    }
+    .episode .episode-item small{
+        font-size: 11px;
+    }
+    .episode .episode__list{
+        padding: 4px 10px;
+        font-size: 11px;
+    }
+}

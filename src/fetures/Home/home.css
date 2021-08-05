@@ -1,0 +1,36 @@
+
+.main-content{
+    display: flex;
+    flex-wrap: wrap;
+}
+@media screen and (max-width: 991px){
+    .main-wrapper .main-content{
+        display: block;
+        flex-wrap: nowrap;
+    }
+}
+
+.collection{
+    margin-bottom: 30px;
+}
+
+.collection-item{
+    margin: 0 14px 0 0;
+    width: 25%;
+}
+
+@media screen and (max-width: 766px){
+    .collection{
+        margin-bottom: 20px;
+    }
+    .collection-list{
+        margin: 0 -15px;
+    }
+    .collection-item{
+        margin: 0 2px 0 0!important;
+    }
+}
+
+.collection-list .react-loading-skeleton{
+    min-height: 130px;
+}

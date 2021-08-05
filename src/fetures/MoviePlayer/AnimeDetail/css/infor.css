@@ -1,0 +1,125 @@
+
+/* ----Information movie------ */
+#anis-detail .anis-infor{
+    padding: 0 15px;
+    height: min-content;
+}
+
+@media screen and (max-width: 991px){
+    #anis-detail .anis-infor{
+        margin-top: 30px;
+        padding: 0 3px;
+    }
+    #anis-detail .anis-infor .text-uppercase .catlist{
+        font-size: 12px;
+    }
+}
+#anis-detail .anis-infor .text-uppercase {
+    font-size: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+#anis-detail .anis-infor .text-uppercase .catlist {
+    display: table;
+    line-height: 1.5em;
+    color: #cae962 !important;
+}
+#anis-detail .anis-img{
+    width: 75%;
+}
+#anis-detail .ml__5{
+    margin-left: 50px;
+}
+@media screen and (max-width: 766px){
+    #anis-detail .anis-infor .anis-img{
+        width: 100% !important;
+    }
+}
+@media screen and (max-width: 991px){
+    #anis-detail .anis-infor .anis-img{
+        width: 60%;
+    }
+    #anis-detail .anis-infor .anis-title{
+        font-size: 16px;
+        line-height: 1.2;
+    }
+    #anis-detail .ml__5{
+        margin: 0;
+    }
+    #anis-detail .anis-infor .anis-descript{
+        font-size: 12px;
+    }
+    #anis-detail .anis-infor .anis-descript:first-of-type:first-letter {
+        font-size: 18px; 
+        line-height: 30px; 
+    }
+    #anis-detail .anis-infor .anis-trainer{
+        margin-left: 0;
+    }
+    #anis-detail .anis-infor .anis-trainer .play-trainer{
+        margin-bottom: 10px;
+    }
+}
+#anis-detail .anis-trainer{
+    margin-left: 3rem;
+}
+#anis-detail .anis-img img{
+    width: 100%;
+}
+#anis-detail .anis-title{
+    font-size: 2rem;
+    line-height: 1.2;
+    color: #FFFFFF;
+}
+#anis-detail .anis-title-sub{
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+#anis-detail .anis-descript{
+    font-size: 14px;
+    text-align: justify;
+    line-height: 1.5em;
+    font-weight: 400;
+}
+
+#anis-detail .anis-descript.hidden-content{
+    height: 143px;
+    overflow: hidden;
+}
+
+#anis-detail .more span{
+    cursor: pointer;
+}
+#anis-detail .more span:hover{
+    color: #cae962;
+}
+
+#anis-detail .anis-descript:first-of-type:first-letter {
+     font-weight: 700; font-style: normal; 
+     float: left; 
+     font-size: 21px; 
+     line-height: 37px; 
+     padding: 12px; 
+     background: #90b612; 
+     color: #fff; 
+     margin-right: 12px; 
+}
+#anis-detail .anis-boxes{
+    position: relative;
+    width: auto;
+    height: 100%;
+    border-radius: 10px;
+    padding: 12px;
+    color: #FFFFFF;
+    font-size: 9px;
+}
+#anis-detail .anis-boxes-action a{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+}
+#anis-detail .bg-hear{
+    background-color: #ECBBBE;
+}
