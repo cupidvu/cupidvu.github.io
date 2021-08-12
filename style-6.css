@@ -518,7 +518,7 @@ body #animeAB{
     line-height: 1.65;
     background-color: #202125;
 }
-body #animeAB a, #animeAB h5, #animeAB span, #animeAB p{
+body #animeAB a, #animeAB h5, #animeAB p{
     color: #fff;
 }
 body #animeAB a:hover {

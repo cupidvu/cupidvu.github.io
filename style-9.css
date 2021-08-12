@@ -465,6 +465,48 @@ ul.sub-menu {
     }
 }
 
+.fixed-header .btn-toggle{
+    width: auto;
+    margin: 12px 0 10px 30px;
+    height: auto;
+    float: left;
+}
+.fixed-header .btn-toggle .random-film{
+    color: #9fc71e !important;
+    height: 43px;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    display: block;
+}
+.fixed-header .btn-toggle .random-film .rd-icon{
+    height: 23px;
+    width: 100%;
+    font-size: 20px;
+    line-height: 20px;
+    margin-bottom: 0;
+}
+
+.fixed-header .btn-toggle .random-film .rd-title{
+    font-size: 11px;
+    height: 20px;
+    color: #fff;
+    width: 100%;
+    margin: 0;
+}
+
+.tooltip-title .arrow::before{
+    color: #fff;
+    border-bottom-color: #fff;
+}
+.tooltip-title .tooltip-inner{
+    background-color: #fff;
+    color: #111;
+    font-family: Montserrat,Arial;
+    font-size: 13px;
+    font-weight: 400;
+}
+
 .search-content div{
     width: 100%;
 }
@@ -883,7 +925,7 @@ ul.sub-menu {
     margin-bottom: 10px;
 }
 .episode .episode__list{
-    color: #EC5C2A;
+    color: #FFFFFF;
     border: 1px solid #EC5C2A;
     padding: 8px 20px;
     font-size: 14px;
@@ -909,7 +951,7 @@ ul.sub-menu {
 }
 
 @media screen and (max-width: 991px){
-    .episode .episode-list-item{
+    .episode .episode-grid{
         margin: 0 -15px;
     }
 
@@ -928,6 +970,92 @@ ul.sub-menu {
     .episode .episode__list{
         padding: 4px 10px;
         font-size: 11px;
+    }
+}
+.episode__title .toggle-episodes{
+    padding-left: 3px;
+    max-width: 100%;
+    width: 100%;
+}
+.episode__title .toggle-episodes .toggle-list{
+    margin-right: 10px;
+}
+.episode__title .toggle-episodes .toggle-list .action{
+    padding: 0;
+}
+.episode__title .toggle-episodes .toggle-list .action.active{
+    color: #cae962 !important;
+}
+
+#list{
+    width: 100%;
+    max-height: 300px;
+    background: #202125;
+}
+.episode-list .wrapper-list{
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+}
+.back-gray{
+    background: #2A2C31;
+}
+.episode-list .wrapper-list .item{
+    width: 50%;
+    padding: 10px;
+    height: auto;
+    font-size: 20px;
+    color: #c6c6c7 !important;
+    display: flex !important;
+    flex-wrap: wrap;
+    position: relative;
+}
+.episode-list .wrapper-list .item.active, .episode-list .wrapper-list .item:hover{
+    background-color: #4A4B51 !important;
+    color: #fff !important;
+}
+.item.active{
+    border-left: 4px solid #cae962;
+}
+.item .episode-number{
+    font-weight: 450;
+    margin-right: 10px;
+}
+.item.active .episode-number{
+    color: #cae962 !important;
+}
+.item-content{
+    width: 100%;
+    height: max-content;
+    position: relative;
+}
+.episode-icon-play{
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    color: #cae962 !important;
+    width: auto;
+    height: auto;
+}
+.item.active .episode-icon-play{
+    display: block;
+}
+.item .episode-title, .item .episode-number{
+    font-size: 16px;
+}
+@media screen and (max-width: 766px){
+    .episode-list .wrapper-list .item{
+        width: 100%;
+        padding: 6px 10px;
+    }
+    .item .episode-title, .item .episode-number{
+        font-size: 13px;
+    }
+    .episode-icon-play{
+        font-size: 15px;
+        padding-top: 5px;
     }
 }
 .animes{
@@ -1279,7 +1407,6 @@ ul.sub-menu {
     list-style: none;
     margin: 0;
     padding: 0;
-    position: relative;
 }
 
 .block-area .item-area{
@@ -1295,27 +1422,30 @@ ul.sub-menu {
 .block-area .item-area .film-number {
     position: absolute;
     width: 40px;
-    text-align: left;
     left: -40px;
     top: 50%;
     transform: translateY(-50%);
-    cursor: default
+    cursor: default;
 }
 
 .block-area .item-area .film-number .number{
     font-weight: 600;
     font-size: 20px;
     color: #737682 !important;
-    position: relative;
-    display: inline-block
+    display: inline-block;
+    height: min-content;
 }
 
 .block-area .item-area.top-on .film-number .number{
     border-bottom: 3px solid #cae962 !important;
     color: #fff !important;
 }
-
-.block-area .item-area .film-poster{
+.lazyloaded{
+    transition: all .5s ease 0s;
+    -webkit-transition: all .5s ease 0s;
+    -moz-transition: all .5s ease 0s;
+}
+.block-area .item-area .film-poster-area{
     width: 45px;
     height: auto;
     padding-bottom: 60px;
@@ -1325,13 +1455,11 @@ ul.sub-menu {
     transform: translateY(-50%);
     left: 0;
     z-index: 2;
-    overflow: hidden;
     background-color: rgba(255,255,255,.1);
 }
-.block-area .film-poster .film-poster-img, .item-cover-img {
+.block-area .film-poster-area .film-poster-img, .item-cover-img {
     position: absolute;
     width: 100%;
-    max-width: 100%;
     height: 100%;
     object-fit: cover;
     top: 0;

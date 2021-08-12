@@ -347,7 +347,6 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    position: relative;
 }
 
 .block-area .item-area{
@@ -363,27 +362,30 @@
 .block-area .item-area .film-number {
     position: absolute;
     width: 40px;
-    text-align: left;
     left: -40px;
     top: 50%;
     transform: translateY(-50%);
-    cursor: default
+    cursor: default;
 }
 
 .block-area .item-area .film-number .number{
     font-weight: 600;
     font-size: 20px;
     color: #737682 !important;
-    position: relative;
-    display: inline-block
+    display: inline-block;
+    height: min-content;
 }
 
 .block-area .item-area.top-on .film-number .number{
     border-bottom: 3px solid #cae962 !important;
     color: #fff !important;
 }
-
-.block-area .item-area .film-poster{
+.lazyloaded{
+    transition: all .5s ease 0s;
+    -webkit-transition: all .5s ease 0s;
+    -moz-transition: all .5s ease 0s;
+}
+.block-area .item-area .film-poster-area{
     width: 45px;
     height: auto;
     padding-bottom: 60px;
@@ -393,13 +395,11 @@
     transform: translateY(-50%);
     left: 0;
     z-index: 2;
-    overflow: hidden;
     background-color: rgba(255,255,255,.1);
 }
-.block-area .film-poster .film-poster-img, .item-cover-img {
+.block-area .film-poster-area .film-poster-img, .item-cover-img {
     position: absolute;
     width: 100%;
-    max-width: 100%;
     height: 100%;
     object-fit: cover;
     top: 0;
